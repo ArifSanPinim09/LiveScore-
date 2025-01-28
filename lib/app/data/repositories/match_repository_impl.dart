@@ -3,17 +3,18 @@ import 'package:dio/dio.dart';
 import 'package:dartz/dartz.dart';
 import 'package:livescore_plus/app/core/errors/exceptions.dart';
 import 'package:livescore_plus/app/core/errors/failures.dart';
-import 'package:livescore_plus/app/data/models/live_match_model.dart';
+import 'package:livescore_plus/app/core/values/api_constant.dart';
+import 'package:livescore_plus/app/data/models/live_models/live_match_model.dart';
 import 'package:livescore_plus/app/data/repositories/match_repository.dart';
 import '../datasources/match_local_datasource.dart';
 import '../../core/network/network_info.dart';
 
-class MatchRepositoryImpl implements MatchRepository {
+class LiveMatchRepositoryImpl implements LiveMatchRepository {
   final MatchRemoteDataSource remoteDataSource;
   final MatchLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
 
-  MatchRepositoryImpl({
+  LiveMatchRepositoryImpl({
     required this.remoteDataSource,
     required this.localDataSource,
     required this.networkInfo,
@@ -108,7 +109,7 @@ class MatchRemoteDataSourceImpl implements MatchRemoteDataSource {
   MatchRemoteDataSourceImpl({required this.dio}) {
     dio.options.headers = {
       'x-rapidapi-host': 'free-api-live-football-data.p.rapidapi.com',
-      'x-rapidapi-key': '6fed037c63msh94d6f43484eb352p153132jsnad6ef55a39aa',
+      'x-rapidapi-key': ApiConstant.apiKey,
     };
   }
 

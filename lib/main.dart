@@ -8,7 +8,6 @@ import 'app/routes/app_pages.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize SharedPreferences first
   final sharedPreferences = await SharedPreferences.getInstance();
   Get.put(sharedPreferences, permanent: true);
 

@@ -40,6 +40,10 @@ dependencies:
   internet_connection_checker_plus: ^2.7.0
   shared_preferences: ^2.3.5
   icons_plus: ^5.0.0
+  intl: ^0.20.1
+  syncfusion_flutter_datepicker: ^28.1.41
+  cached_network_image: ^3.4.1
+  font_awesome_flutter: ^10.8.0
 
 dev_dependencies:
   flutter_test:

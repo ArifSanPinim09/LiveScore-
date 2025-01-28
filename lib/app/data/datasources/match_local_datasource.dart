@@ -2,7 +2,7 @@
 import 'dart:convert';
 
 import 'package:livescore_plus/app/core/errors/exceptions.dart';
-import 'package:livescore_plus/app/data/models/live_match_model.dart';
+import 'package:livescore_plus/app/data/models/live_models/live_match_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class MatchLocalDataSource {

@@ -1,11 +1,15 @@
 // lib/domain/entities/live_match.dart
 abstract class LiveMatch {
-  final int id;
+  final String id;
   final int leagueId;
   final String time;
   final Team home;
   final Team away;
   final MatchStatus status;
+  String? homeImageUrl; // Non-final
+  String? awayImageUrl; // Non-final
+  String? leagueLogo; // Non-final
+  String? shortName; // Non-final
 
   LiveMatch({
     required this.id,
@@ -14,6 +18,10 @@ abstract class LiveMatch {
     required this.home,
     required this.away,
     required this.status,
+    this.homeImageUrl,
+    this.awayImageUrl,
+    this.leagueLogo,
+    this.shortName,
   });
 }
 
@@ -23,6 +31,7 @@ abstract class Team {
   final String longName;
   final int score;
   final int? redCards;
+  final String? imageUrl;
 
   Team({
     required this.id,
@@ -30,6 +39,7 @@ abstract class Team {
     required this.longName,
     required this.score,
     this.redCards,
+    this.imageUrl,
   });
 }
 
@@ -137,11 +147,18 @@ class LiveMatchModel extends LiveMatch {
     required TeamModel home,
     required TeamModel away,
     required MatchStatusModel status,
+    super.homeImageUrl,
+    super.awayImageUrl,
+    super.leagueLogo,
+    this.shortName, // Tambahkan field ini
   }) : super(
           home: home,
           away: away,
           status: status,
         );
+
+  @override
+  String? shortName; // Field untuk nama liga
 
   factory LiveMatchModel.fromJson(Map<String, dynamic> json) {
     return LiveMatchModel(
@@ -151,6 +168,10 @@ class LiveMatchModel extends LiveMatch {
       home: TeamModel.fromJson(json['home']),
       away: TeamModel.fromJson(json['away']),
       status: MatchStatusModel.fromJson(json['status']),
+      homeImageUrl: json['homeImageUrl'],
+      awayImageUrl: json['awayImageUrl'],
+      leagueLogo: json['leagueLogo'],
+      shortName: json['shortName'], // Ambil dari JSON
     );
   }
 
@@ -162,6 +183,10 @@ class LiveMatchModel extends LiveMatch {
       'home': (home as TeamModel).toJson(),
       'away': (away as TeamModel).toJson(),
       'status': (status as MatchStatusModel).toJson(),
+      if (homeImageUrl != null) 'homeImageUrl': homeImageUrl,
+      if (awayImageUrl != null) 'awayImageUrl': awayImageUrl,
+      if (leagueLogo != null) 'leagueLogo': leagueLogo,
+      if (shortName != null) 'shortName': shortName,
     };
   }
 }
@@ -173,6 +198,7 @@ class TeamModel extends Team {
     required super.longName,
     required super.score,
     super.redCards,
+    super.imageUrl,
   });
 
   factory TeamModel.fromJson(Map<String, dynamic> json) {
@@ -182,6 +208,7 @@ class TeamModel extends Team {
       longName: json['longName'],
       score: json['score'],
       redCards: json['redCards'],
+      imageUrl: json['imageUrl'],
     );
   }
 
